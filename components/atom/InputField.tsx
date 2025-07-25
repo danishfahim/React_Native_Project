@@ -28,13 +28,12 @@ const InputField = ({
         control={control}
         name={name}
         rules={rules}
-        render={({ field: { onChange, onBlur, value } }) => (
+        render={({ field: { onChange, value } }) => (
           <TextInput
             placeholder={placeholder}
             onChangeText={onChange}
             value={value}
             secureTextEntry={secureTextEntry}
-            
             placeholderTextColor="#A6A9B6"
 
           />

@@ -56,13 +56,13 @@ const ResetPasswordScreen = () => {
                         }}
                         className=" mt-3.5  rounded-full "
                     />
-                    <Text className='font-albertSans700Bold  text-xl text-baseDark-light mb-8 mt-7'>Setup New Password</Text>
+                    <Text className='font-albertSans700Bold  text-xl text-baseDark-light mb-1 mt-5'>Setup New Password</Text>
                     <Text className='font-albertSans300Light text-lg text-baseDark-light mb-6 mx-7 text-center'>Please, setup a new password for your account</Text>
                 </View>
                 <InputField
                     name="password"
                     control={control}
-                    placeholder="Enter password"
+                    placeholder="New Password"
                     secureTextEntry
                     rules={{
                         required: "Password is required",
@@ -80,7 +80,7 @@ const ResetPasswordScreen = () => {
                     placeholder="Enter password"
                     secureTextEntry
                     rules={{
-                        required: "Password is required",
+                        required: "Repeat Password",
                         minLength: {
                             value: 6,
                             message: "Minimum 6 characters required",

@@ -29,11 +29,11 @@ const SignupScreen = () => {
     formState: { errors },
   } = useForm();
 
-  // function onsubmit(data) {
-  //   // Simulate form submission
-  //   console.log("Submitted Data:", data);
-  //   setSubmittedData(data);
-  // }
+  function onsubmit(data) {
+    // Simulate form submission
+    console.log("Submitted Data:", data);
+    setSubmittedData(data);
+  }
 
   return (
     <PageWraper>
@@ -80,7 +80,7 @@ const SignupScreen = () => {
         <InputField
           name="email"
           control={control}
-          placeholder="Enter your email"
+          placeholder="Email"
           rules={{
             required: "Email is required",
             placeholder: "please enter yor email",
@@ -95,7 +95,7 @@ const SignupScreen = () => {
         <InputField
           name="password"
           control={control}
-          placeholder="Enter password"
+          placeholder="Password"
           secureTextEntry
           rules={{
             required: "Password is required",
