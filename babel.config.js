@@ -7,7 +7,7 @@ module.exports = function (api) {
     ],
     
     plugins: [ 
-      'react-native-reanimated/plugin' // 👈 ALWAYS LAST
+      // 'react-native-reanimated/plugin' // 👈 ALWAYS LAST
     ],
   };
 };

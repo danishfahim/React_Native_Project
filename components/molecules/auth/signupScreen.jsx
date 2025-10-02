@@ -7,6 +7,7 @@ import { LOGIN } from "@/constants/appRoute";
 import { Icons } from "@/constants/icons";
 import { Icons_Library } from "@/constants/IconsLibrary";
 import { images } from "@/constants/images";
+import { AuthAPI } from "@/hooks/auth/auth";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -30,22 +31,16 @@ const SignupScreen = () => {
   } = useForm();
 
   async function onsubmit(data) {
-    console.log("Submitted Data:", data);
-    // try {
-    //   const { email, password, phone } = data;
-    //   const response = await signUp(email, password, phone);
-    //   if (response.error) {
-    //     console.error("Error during sign up:", response.error.message);
-    //     // Handle error (e.g., show error message to user)
-    //     return;
-    //   }
+    const { email, password } = data;
 
-    // } catch (error) {
-    //   console.log("Unexpected error during sign up:", error);
-    // }
-    router.push(LOGIN);
-    // console.log("User signed up successfully:", user);
-    // setSubmittedData(data);
+    try {
+      const result = await AuthAPI.register({ email, password });
+      console.log("User signed up:", result);
+      router.push(LOGIN); // move to login screen after success
+    } catch (error) {
+      console.error("Signup failed:", error.message);
+      // Show error to user if needed
+    }
   }
 
   return (
@@ -129,7 +124,10 @@ const SignupScreen = () => {
           errors={errors}
         />
         <PrimaryButton title="Sign Up" handleClick={handleSubmit(onsubmit)} />
-        <TouchableOpacity className="items-center mt-6">
+        <TouchableOpacity
+          className="items-center mt-6"
+          onPress={() => router.push(LOGIN)}
+        >
           <Text>Cancel</Text>
         </TouchableOpacity>
       </View>

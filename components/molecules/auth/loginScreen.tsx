@@ -1,10 +1,10 @@
 import InputField from "@/components/atom/InputField";
 import PrimaryButton from "@/components/atom/PrimaryButton";
 import PageWraper from "@/components/organisms/pageWraper";
-import { LOGIN } from "@/constants/appRoute";
-import { Icons } from "@/constants/icons";
+import { FORGOT_PASSWORD } from "@/constants/appRoute";
 import { Icons_Library } from '@/constants/IconsLibrary';
 import { images } from "@/constants/images";
+import { AuthAPI } from "@/hooks/auth/auth";
 import { Image } from "expo-image";
 import { router } from "expo-router";
 import { useState } from "react";
@@ -14,11 +14,6 @@ const LoginScreen = () => {
     const [submittedData, setSubmittedData] = useState(null);
 
     console.log(Icons_Library.SimpleLineIcons)
-    const data = [
-        { label: "English", value: "eng", icon: Icons.ENG },
-        { label: "French", value: "fra", icon: Icons.ENG },
-        { label: "German", value: "ger", icon: Icons.ENG },
-    ];
 
     const {
         register,
@@ -30,8 +25,23 @@ const LoginScreen = () => {
 
 
 
-    async function onsubmit(data : any) { 
-        
+    async function onsubmit(data: any) {
+        console.log("Login form submitted with data:", data);
+        const { email, password } = data;
+
+        try {
+            console.log("Attempting login with:", { email, password });
+            const { user, session } = await AuthAPI.login({ email, password });
+            console.log("Login successful!");
+            console.log("User data:", user);
+            console.log("Session data:", session);
+            alert("Login successful! Check console for user data.");
+            // router.push(HOME); // Add your home route here
+        } catch (error) {
+            console.error("Login failed:", error instanceof Error ? error.message : String(error));
+            alert("Login failed: " + (error instanceof Error ? error.message : String(error)));
+        }
+
         setSubmittedData(data);
     }
 
@@ -88,15 +98,7 @@ const LoginScreen = () => {
                     Login
                 </Text>
                 <View className="flex-row">
-                    <Text className="font-albertSans300Light text-[19px]">Good to see you back!  </Text>
-                    <Image source={images.HEART}
-                        style={{
-                            marginTop: 3,
-                            width: 17,
-                            height: 16,
-                            flexShrink: 0
-                        }}
-                    />
+                    <Text className="font-albertSans300Light text-[19px]">Good to see you back! 🖤</Text>
                 </View>
 
                 {/* <IconLable
@@ -124,9 +126,25 @@ const LoginScreen = () => {
                     errors={errors}
                     customClass="mt-5"
                 />
-
-
-                <PrimaryButton title="Sign Up" handleClick={handleSubmit(onsubmit)} customClass="mt-8" />
+                <InputField
+                    name="password"
+                    control={control}
+                    placeholder="Password"
+                    secureTextEntry
+                    rules={{
+                        required: "Password is required",
+                        minLength: {
+                            value: 6,
+                            message: "Minimum 6 characters required",
+                        },
+                    }}
+                    errors={errors}
+                    customClass="mt-3"
+                />
+                <TouchableOpacity onPress={() => router.push(FORGOT_PASSWORD)}>
+                    <Text className="flex flex-row-reverse ml-auto mt-5 text-primary-light font-albertSans700Bold text-base">Forgot your password?</Text>
+                </TouchableOpacity>
+                <PrimaryButton title="Login" handleClick={handleSubmit(onsubmit)} customClass="mt-2" />
                 <TouchableOpacity className="items-center mt-4">
                     <Text>Cancel</Text>
                 </TouchableOpacity>
