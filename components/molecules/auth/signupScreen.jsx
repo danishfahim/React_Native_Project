@@ -29,10 +29,23 @@ const SignupScreen = () => {
     formState: { errors },
   } = useForm();
 
-  function onsubmit(data) {
-    // Simulate form submission
+  async function onsubmit(data) {
     console.log("Submitted Data:", data);
-    setSubmittedData(data);
+    // try {
+    //   const { email, password, phone } = data;
+    //   const response = await signUp(email, password, phone);
+    //   if (response.error) {
+    //     console.error("Error during sign up:", response.error.message);
+    //     // Handle error (e.g., show error message to user)
+    //     return;
+    //   }
+
+    // } catch (error) {
+    //   console.log("Unexpected error during sign up:", error);
+    // }
+    router.push(LOGIN);
+    // console.log("User signed up successfully:", user);
+    // setSubmittedData(data);
   }
 
   return (
@@ -115,7 +128,7 @@ const SignupScreen = () => {
           rules={{ required: "Phone is required" }}
           errors={errors}
         />
-        <PrimaryButton title="Sign Up" handleClick={() => router.push(LOGIN)} />
+        <PrimaryButton title="Sign Up" handleClick={handleSubmit(onsubmit)} />
         <TouchableOpacity className="items-center mt-6">
           <Text>Cancel</Text>
         </TouchableOpacity>

@@ -15,7 +15,7 @@ module.exports = {
         albertSans700Bold: ["AlbertSans_700Bold", "sans-serif"],
         albertSans800ExtraBold: ["AlbertSans_800ExtraBold", "sans-serif"],
         albertSans900Black: ["AlbertSans_900Black", "sans-serif"],
-        albertSans100ThinItalic: ["AlbertSans_100Thin_Italic", "sans-serif"],
+        albertSans100ThinItalic: ["AlbertSans_100Thin_Italic", "sans-serif"], 
         albertSans200ExtraLightItalic: [
           "AlbertSans_200ExtraLight_Italic",
           "sans-serif",

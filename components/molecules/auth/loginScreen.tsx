@@ -1,7 +1,7 @@
 import InputField from "@/components/atom/InputField";
 import PrimaryButton from "@/components/atom/PrimaryButton";
 import PageWraper from "@/components/organisms/pageWraper";
-import { PASSWORD } from "@/constants/appRoute";
+import { LOGIN } from "@/constants/appRoute";
 import { Icons } from "@/constants/icons";
 import { Icons_Library } from '@/constants/IconsLibrary';
 import { images } from "@/constants/images";
@@ -26,6 +26,17 @@ const LoginScreen = () => {
         control,
         formState: { errors },
     } = useForm();
+
+
+
+
+    async function onsubmit(data : any) { 
+        
+        setSubmittedData(data);
+    }
+
+
+
 
     // function onsubmit(data) {
     //   // Simulate form submission
@@ -115,7 +126,7 @@ const LoginScreen = () => {
                 />
 
 
-                <PrimaryButton title="Sign Up" handleClick={() => router.push(PASSWORD)} customClass="mt-8" />
+                <PrimaryButton title="Sign Up" handleClick={handleSubmit(onsubmit)} customClass="mt-8" />
                 <TouchableOpacity className="items-center mt-4">
                     <Text>Cancel</Text>
                 </TouchableOpacity>
